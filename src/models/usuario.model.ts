@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+
 export interface Carrito{
 producto: string
 precio: number
 }
 
-export interface login{
+export interface usuarios{
     _id?: mongoose.Types.ObjectId
     nombre: string
     apellido: string

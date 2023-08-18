@@ -10,16 +10,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AgregarCancionesPlaylist = exports.login = exports.obtenerNombresUsuarios = void 0;
-const login_schema_1 = require("../models/login.schema");
+const usuario_schema_1 = require("../models/usuario.schema");
 //(controlador usuarios)mostrar los elementos de usuarios en la ventana modal
 const obtenerNombresUsuarios = (req, res) => {
 };
 exports.obtenerNombresUsuarios = obtenerNombresUsuarios;
 //(controlador usuario)mostrar las listas de playlist de cada usuario
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const usuario = yield login_schema_1.loginSchema.findOne({ correo: req.params.correo, contrasena: req.params.contrasena }, { contrasena: false });
+    const usuario = yield usuario_schema_1.usuarioSchema.findOne({ correo: req.params.correo, contrasena: req.params.contrasena }, { contrasena: false });
     if (usuario) {
-        res.send({ status: true, message: 'login correcot', usuario });
+        res.send({ status: true, message: 'login correcto', usuario });
     }
     else {
         res.send({ status: false, message: 'login incorrecto' });

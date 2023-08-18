@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { Carrito, login } from "./login.model";
+import {usuarios,Carrito } from "./usuario.model";
 
-const schema= new mongoose.Schema<login>({
+const schema= new mongoose.Schema<usuarios>({
     nombre:String,
     apellido:String,
     edad: Number,
@@ -9,4 +9,4 @@ const schema= new mongoose.Schema<login>({
     contrasena: String,
     carrito: Array<Carrito>
 })
-export const loginSchema =mongoose.model('login',schema)
+export const usuarioSchema =mongoose.model('usuario',schema)

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginSchema = void 0;
+exports.usuarioSchema = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const schema = new mongoose_1.default.Schema({
     nombre: String,
@@ -13,4 +13,4 @@ const schema = new mongoose_1.default.Schema({
     contrasena: String,
     carrito: (Array)
 });
-exports.loginSchema = mongoose_1.default.model('login', schema);
+exports.usuarioSchema = mongoose_1.default.model('usuario', schema);
