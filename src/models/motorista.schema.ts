@@ -6,3 +6,4 @@ const schema= new mongoose.Schema< motorista>({
     apellido: String,
     correo: String,
 })
+export const motoristaSchema =mongoose.model('motorista',schema)

@@ -7,3 +7,5 @@ categoria: String,
 descripcion: String,
 producto: Array<producto>,
 })
+
+export const categoriaSchema =mongoose.model('categorias',schema)

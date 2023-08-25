@@ -7,3 +7,5 @@ const schema= new mongoose.Schema<empresas>({
     descripcion: String,
     productos:Array<any>,
 })
+
+export const empresasSchema =mongoose.model('empresas',schema)
