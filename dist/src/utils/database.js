@@ -11,7 +11,7 @@ class Database {
         this.port = '27017';
         this.db = 'hexalogy';
         // Cadena de conexión
-        mongoose_1.default.connect(`mongodb://${this.server}:${this.port}/${this.db}`)
+        mongoose_1.default.connect('mongodb+srv://angellyjessibelelvir:vR8Rkr308L4CzbiF@cluster0.4mz52ku.mongodb.net/')
             .then(() => {
             console.log('Se conectó a Mongo');
         }).catch(() => {

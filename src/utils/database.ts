@@ -5,9 +5,11 @@ export class Database {
   port:string = '27017';
   db:string = 'hexalogy';
 
+
+
   constructor() {
     // Cadena de conexión
-    mongoose.connect(`mongodb://${this.server}:${this.port}/${this.db}`)
+    mongoose.connect('mongodb+srv://angellyjessibelelvir:vR8Rkr308L4CzbiF@cluster0.4mz52ku.mongodb.net/')
     .then(()=>{
       console.log('Se conectó a Mongo');
     }).catch(() => {

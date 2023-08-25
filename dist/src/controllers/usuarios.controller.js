@@ -1,35 +1,51 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AgregarCancionesPlaylist = exports.login = exports.obtenerNombresUsuarios = void 0;
+exports.addUser = exports.Login = exports.obtenerUsuarios = void 0;
 const usuario_schema_1 = require("../models/usuario.schema");
-//(controlador usuarios)mostrar los elementos de usuarios en la ventana modal
-const obtenerNombresUsuarios = (req, res) => {
+const mongoose_1 = __importDefault(require("mongoose"));
+//conseguir la lista de usuarios
+const obtenerUsuarios = (req, res) => {
+    usuario_schema_1.usuarioSchema.find()
+        .then((result) => {
+        res.send({ result });
+        res.end();
+    })
+        .catch((error) => {
+        res.send(error);
+        res.end();
+    });
 };
-exports.obtenerNombresUsuarios = obtenerNombresUsuarios;
-//(controlador usuario)mostrar las listas de playlist de cada usuario
-const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const usuario = yield usuario_schema_1.usuarioSchema.findOne({ correo: req.params.correo, contrasena: req.params.contrasena }, { contrasena: false });
-    if (usuario) {
-        res.send({ status: true, message: 'login correcto', usuario });
-    }
-    else {
-        res.send({ status: false, message: 'login incorrecto' });
-    }
-    res.end();
-});
-exports.login = login;
-//*(controlador usuaeios)*agregar caciones de artistas a la lista de playlist del usuario*
-const AgregarCancionesPlaylist = (req, res) => {
-    res.send("agregar canciones a la playlist");
-    res.end();
+exports.obtenerUsuarios = obtenerUsuarios;
+// conseguir la lista de usuarios
+const Login = (req, res) => {
+    usuario_schema_1.usuarioSchema.findById({ _id: req.params.id })
+        .then((result) => {
+        res.send(result);
+        res.end();
+    })
+        .catch((error) => console.error(error));
 };
-exports.AgregarCancionesPlaylist = AgregarCancionesPlaylist;
+exports.Login = Login;
+const addUser = (req, res) => {
+    console.log(req.body.params);
+    const p = new usuario_schema_1.usuarioSchema({
+        _id: new mongoose_1.default.Types.ObjectId(req.body.id),
+        nombre: req.body.nombre,
+        contrasenia: req.body.contrasenia,
+        correo: req.body.correo,
+        telefono: req.body.telefono
+    });
+    p.save().then((saveResponse) => {
+        res.send(saveResponse);
+        console.log(res);
+        res.end();
+    }).catch((error) => {
+        res.send({ message: 'Hubo un error al guardar', error }); // shorthand
+        res.end();
+    });
+    // aqui xd
+};
+exports.addUser = addUser;

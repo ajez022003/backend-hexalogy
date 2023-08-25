@@ -1,26 +1,46 @@
-import {Request, Response } from 'express'
-import { usuarioSchema } from '../models/usuario.schema'
+import { Request, Response } from "express";
+import { usuarioSchema } from "../models/usuario.schema";
+import mongoose from "mongoose";
 
-//(controlador usuarios)mostrar los elementos de usuarios en la ventana modal
-export const obtenerNombresUsuarios =(req: Request, res: Response)=>{
-   
+//conseguir la lista de usuarios
+export const obtenerUsuarios=(req: Request, res: Response)=>{
+    usuarioSchema.find()
+		.then((result) => {
+			res.send({result});
+			res.end();
+		})
+		.catch((error) => {
+            res.send(error);
+			res.end();
+    });
 }
+// conseguir la lista de usuarios
+export const Login = (req: Request, res: Response) => {
+	usuarioSchema.findById({ _id: req.params.id })
+		.then((result) => {
+			res.send(result);
+			res.end();
+		})
+		.catch((error) => console.error(error));
+};
 
-//(controlador usuario)mostrar las listas de playlist de cada usuario
-export const login= async(req: Request, res:Response)=>{
-    const usuario= await usuarioSchema.findOne({correo: req.params.correo, contrasena: req.params.contrasena},{contrasena:false});
-    if(usuario){
-
-        res.send({status:true,message: 'login correcto',usuario})
-    }else{
-        res.send({status:false, message:'login incorrecto'})
-    }
-  
-    res.end()
-    
-}
-//*(controlador usuaeios)*agregar caciones de artistas a la lista de playlist del usuario*
-export const AgregarCancionesPlaylist= (req: Request, res: Response)=>{
-    res.send("agregar canciones a la playlist")
-    res.end()
-}
+export const addUser = (req: Request, res: Response) => {
+	console.log(req.body.params);
+	
+	const p = new usuarioSchema({
+		_id: new mongoose.Types.ObjectId(req.body.id),
+		nombre: req.body.nombre,
+		contrasenia: req.body.contrasenia,
+		correo: req.body.correo,
+		telefono: req.body.telefono
+	});
+  p.save().then((saveResponse:any) => {
+    res.send(saveResponse);
+	console.log(res);
+    res.end();
+  }).catch((error:any) => {
+    res.send({message: 'Hubo un error al guardar', error}); // shorthand
+    res.end();
+  });
+  // aqui xd
+};
