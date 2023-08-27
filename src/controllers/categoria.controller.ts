@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CategoriaSchema } from '../models/categoria.schema';
+
 import mongoose from "mongoose";
 
 
@@ -210,3 +210,4 @@ export const obtenerCategoriaPorId = (req: Request, res: Response) => {
         res.status(404).json({ message: 'Categoría no encontrada' });
     }
 };
+

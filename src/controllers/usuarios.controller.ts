@@ -273,3 +273,5 @@ export const eliminarUsuario = (req: Request, res: Response) => {
         res.status(404).json({ status: false, message: 'Usuario no encontrado' });
     }
 };
+
+
